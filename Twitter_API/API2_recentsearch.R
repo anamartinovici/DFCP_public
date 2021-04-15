@@ -2,14 +2,14 @@
 library(httr)
 
 # Replace the bearer token below with the bearer_token for your own app
-bearer_token = "thisisnotarealtoken"
+bearer_token <- "thisisnotarealtoken"
 
 headers = c(
     `Authorization` = sprintf('Bearer %s', bearer_token)
 )
 
 params = list(
-    `query` = 'from:twitterdev lang:en',
+    `query` = 'from:Ana_Martinovici',
     `max_results` = '10',
     `tweet.fields` = 'created_at,lang,context_annotations'
 )
