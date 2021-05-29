@@ -9,3 +9,5 @@ Brief info about files in this repo:
 - `Twitter_API_v2_endpoints_resources`
     
     - The `.Rmd` file is the R markdown file you can knit to get the `.html` output
+    
+    - Check either the `.Rmd` or `.html` (open in browser) for links to resources about the Twitter API.
