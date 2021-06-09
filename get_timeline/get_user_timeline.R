@@ -54,7 +54,8 @@ user_id <- obj[["data"]][[1]][["id"]]
 url_handle <- paste0('https://api.twitter.com/2/users/', user_id, "/tweets")
 # by default, the number of tweets retrieved per request is 10
 # you can ask for more tweets (check the documentation for exact info)
-params <- list(max_results = "100")
+params <- list(max_results = "100",
+               tweet.fields = "created_at")
 response <-	httr::GET(url = url_handle,
                       config = httr::add_headers(.headers = my_header[["headers"]]),
                       query = params)
@@ -116,4 +117,14 @@ while(!is.null(obj[["meta"]][["next_token"]])) {
     # this stops the "stopwatch" and prints the time it took to execute the 
     #       lines of code between tic and toc
     toc()
+}
+
+raw_content <- purrr::map(all_response_objects, httr::content)
+raw_tweets  <- purrr::map(raw_content, "data")
+raw_tweets  <- purrr::flatten(raw_tweets)
+
+df_tweets <- raw_tweets %>% {
+    tibble(tweet_id   = map_chr(., "id"),
+           text       = map_chr(., "text"),
+           created_at = map_chr(., "created_at"))
 }
