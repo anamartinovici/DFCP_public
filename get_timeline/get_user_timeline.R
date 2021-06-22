@@ -55,7 +55,8 @@ url_handle <- paste0('https://api.twitter.com/2/users/', user_id, "/tweets")
 # by default, the number of tweets retrieved per request is 10
 # you can ask for more tweets (check the documentation for exact info)
 params <- list(max_results = "100",
-               tweet.fields = "created_at")
+               tweet.fields = "created_at",
+               exclude = "replies,retweets")
 response <-	httr::GET(url = url_handle,
                       config = httr::add_headers(.headers = my_header[["headers"]]),
                       query = params)
