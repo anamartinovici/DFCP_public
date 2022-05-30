@@ -1,21 +1,20 @@
 This repository contains information about the "Digital Footprints of Consumer Preferences" course taught by dr. Martinovici. 
 
-Note that these documents were used in the 2020-2021 academic year. The information in these documents is subject to change prior to the start of the course in the 2021-2022 academic year. The availability and functionality of the Twitter API is fully under Twitter's control. Therefore, **it is uncertain if students will learn how to use the Twitter API as part of the 2021-2022 DFCP course**.
-
 Brief info about what you find in this repo:
 
-- `elective_info_session`: check these materials to get an idea of what happened in Academic Year 2020-2021
+- `f_aux_functions.R` contains:
+  
+  - `f_test_API`: you can use this function to test your connection to the Twitter API
+  
+  - `f_get...`: helper functions that you can use to extract specific fields from the response object
 
-- `get_replies_to_tweet`, `get_timeline`, `recent_search`, `username_lookup` : example code on how to perform the action that matches the name of the folder
+- `examples\` contains:
 
-- `f_aux_functions.R`: functions useful for data collection and processing
+  - `how_to_test_your_connection.R` shows how to check if you are able to collect data via the Twitter API
+  
+  - `steps_to_collect_data.R` shows how to structure the data collection file
+  
+  - `recent_search`: a detailed example for how to collect data using the recent search endpoint, how to process the response objects, and how to check the output. 
 
-- `test_API_connection.R`: example code to test if you can get data from the API
+  - `user_timeline`: a detailed example for how to collect data using the user timeline endpoint, and how to process the response objects.
 
-- `Twitter_API_v2_endpoints_resources`
-    
-    - The `.Rmd` file is the R markdown file you can knit to get the `.html` output
-    
-    - Check either the `.Rmd` or `.html` (open in browser) for links to resources about the Twitter API.
-
-- `img`: this folder stores image files used by `Twitter_API_v2_endpoints_resources.Rmd`

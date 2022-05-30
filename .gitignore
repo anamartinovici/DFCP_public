@@ -1,3 +1,7 @@
 .Rproj.user
 .Rhistory
 .Ruserdata
+
+examples/recent_search/raw_dataset.RData
+examples/recent_search/processed_data.RData
+examples/recent_search/3_data_checks.html
