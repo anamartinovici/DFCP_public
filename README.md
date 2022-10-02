@@ -2,6 +2,8 @@ This repository contains information about the "Digital Footprints of Consumer P
 
 Brief info about what you find in this repo:
 
+- `elective_info_session`: course manual and step-by-step instructions
+
 - `f_aux_functions.R` contains:
   
   - `f_test_API`: you can use this function to test your connection to the Twitter API
