@@ -1,6 +1,10 @@
 This repository contains information about the "Digital Footprints of Consumer Preferences" course taught by dr. Martinovici. 
 
+Note that these documents were used in the 2021-2022 academic year. The information in these documents is subject to change prior to the start of the course in the 2022-2023 academic year. The availability and functionality of the Twitter API is fully under Twitter's control. Therefore, **it is uncertain if students will learn how to use the Twitter API as part of the 2022-2023 DFCP course**.
+
 Brief info about what you find in this repo:
+
+- `elective_info_session`: course manual and step-by-step instructions
 
 - `f_aux_functions.R` contains:
   
