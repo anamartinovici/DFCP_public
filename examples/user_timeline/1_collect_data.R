@@ -1,14 +1,7 @@
 # there's no need for rm(list=ls()) at the start of the file
 # to restart the R Session on Windows, use CTRL + SHIFT + F10
 
-################################################
-################################################
-#
 # test if you can connect to the API
-#
-################################################
-################################################
-
 # you need httr to GET data from the API
 # note that httr can be used also with other APIs, 
 #		it this is not specific to the Twitter API
@@ -19,13 +12,11 @@ library("tidyverse")
 # add more packages ONLY if you need to use them
 
 # f_aux_functions.R contains a function that you can use to test the token
-source("f_aux_functions.R")
+source(here::here("aux_functions.R"))
 my_header <- f_test_API(token_type = "elevated")
 
-################################################
 # Step 1: collect the user_id for this handle
-################################################
-handle <- 'Ana_Martinovici'
+handle <- 'techreview'
 url_handle <- paste0('https://api.twitter.com/2/users/by?usernames=', handle)
 response <-	httr::GET(url = url_handle,
 					  config = httr::add_headers(.headers = my_header[["headers"]]))
@@ -81,7 +72,14 @@ obj[["meta"]][["next_token"]]
 # as long as there are more tweets to collect, meta.next_token has a value
 # otherwise, if meta.next_token is null, this means you've collected all tweets
 #     that meet the query criteria
-while(!is.null(obj[["meta"]][["next_token"]])) {
+# depending on what type of tweets you want to collect for the target account 
+#       you can get either the most recent 3200 or 800 tweets 
+#       (see API documentation for details)
+# to prevent you collecting too many tweets by accidents, I add an additional test
+#       for the maximum number of requests
+N_requests <- 10
+
+while(request_number < N_requests && !is.null(obj[["meta"]][["next_token"]])) {
 	Sys.sleep("2")
 	# use tic toc functions to see how much time it takes per request
 	tic("duration for request number: ")
@@ -117,4 +115,5 @@ while(!is.null(obj[["meta"]][["next_token"]])) {
 	toc()
 }
 
-save(all_response_objects, file = "examples/user_timeline/raw_dataset.RData")
+save(all_response_objects, 
+     file = here::here("examples", "user_timeline", "raw_dataset.RData"))

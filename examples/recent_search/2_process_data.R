@@ -10,10 +10,12 @@ library("tidyverse")
 # add more packages ONLY if you need to use them
 
 # f_aux_functions.R contains functions for data processing
-source("f_aux_functions.R")
+source(here::here("aux_functions.R"))
 
 # load the dataset you've just collected
-load("examples/recent_search/raw_dataset.RData")
+load(here::here("examples",
+                "recent_search", 
+                "raw_dataset.RData"))
 
 raw_content <- purrr::map(all_response_objects, httr::content)
 # the line above is equivalent to a for loop 
@@ -78,73 +80,70 @@ names(raw_places) <- NULL
 
 # rearrange the data in a tibble
 df_tweets <- raw_tweets %>% 
-	{tibble(tweet_id           = map_chr(., "id"),
-			text               = map_chr(., "text"),
-			lang               = map_chr(., "lang"),
-			created_at         = map_chr(., "created_at"),
-			author_id          = map_chr(., "author_id"),
-			source             = map_chr(., "source"),
-			conversation_id    = map_chr(., "conversation_id"),
-			possibly_sensitive = map_chr(., "possibly_sensitive"),
-			reply_settings     = map_chr(., "reply_settings"),
-			geo_place_id       = map_chr(., f_get_geo_placeid),
-			retweet_count      = map_int(., f_get_retweet_count),
-			reply_count        = map_int(., f_get_reply_count),
-			like_count         = map_int(., f_get_like_count),
-			quote_count        = map_int(., f_get_quote_count),
-			tweet_type         = map_chr(., f_get_tweet_type),
-			ref_tweet_id       = map_chr(., f_get_ref_tweet_id))}
+    {tibble(tweet_id           = map_chr(., "id"),
+            text               = map_chr(., "text"),
+            lang               = map_chr(., "lang"),
+            created_at         = map_chr(., "created_at"),
+            author_id          = map_chr(., "author_id"),
+            conversation_id    = map_chr(., "conversation_id"),
+            reply_settings     = map_chr(., "reply_settings"),
+            geo_place_id       = map_chr(., f_get_geo_placeid),
+            retweet_count      = map_int(., f_get_retweet_count),
+            reply_count        = map_int(., f_get_reply_count),
+            like_count         = map_int(., f_get_like_count),
+            quote_count        = map_int(., f_get_quote_count),
+            tweet_type         = map_chr(., f_get_tweet_type),
+            ref_tweet_id       = map_chr(., f_get_ref_tweet_id))}
 # check ?map for more info
 
 df_users <- raw_users %>% 
-	{tibble(u_id                = map_chr(., "id"),
-			u_name              = map_chr(., "name"),
-			u_username          = map_chr(., "username"),
-			u_protected         = map_chr(., "protected"),
-			u_description       = map_chr(., "description"),
-			u_verified          = map_chr(., "verified"),
-			u_created_at        = map_chr(., "created_at"),
-			u_profile_image_url = map_chr(., "profile_image_url"),
-			u_location          = map_chr(., f_get_u_location),
-			u_followers_count   = map_int(., f_get_followers_count),
-			u_following_count   = map_int(., f_get_following_count),
-			u_tweet_count       = map_int(., f_get_tweet_count),
-			u_listed_count      = map_int(., f_get_listed_count))}
+    {tibble(u_id                = map_chr(., "id"),
+            u_name              = map_chr(., "name"),
+            u_username          = map_chr(., "username"),
+            u_description       = map_chr(., "description"),
+            u_created_at        = map_chr(., "created_at"),
+            u_profile_image_url = map_chr(., "profile_image_url"),
+            u_location          = map_chr(., f_get_u_location),
+            u_followers_count   = map_int(., f_get_followers_count),
+            u_following_count   = map_int(., f_get_following_count),
+            u_tweet_count       = map_int(., f_get_tweet_count),
+            u_listed_count      = map_int(., f_get_listed_count))}
 nrow(df_users)
 df_users <- distinct(df_users)
 nrow(df_users)
 
 df_ref_tweets <- raw_ref_tweets %>% 
-	{tibble(ref_tweet_id           = map_chr(., "id"),
-			ref_text               = map_chr(., "text"),
-			ref_lang               = map_chr(., "lang"),
-			ref_created_at         = map_chr(., "created_at"),
-			ref_author_id          = map_chr(., "author_id"),
-			ref_source             = map_chr(., "source"),
-			ref_conversation_id    = map_chr(., "conversation_id"),
-			ref_possibly_sensitive = map_chr(., "possibly_sensitive"),
-			ref_reply_settings     = map_chr(., "reply_settings"),
-			ref_geo_place_id       = map_chr(., f_get_geo_placeid),
-			ref_retweet_count      = map_int(., f_get_retweet_count),
-			ref_reply_count        = map_int(., f_get_reply_count),
-			ref_like_count         = map_int(., f_get_like_count),
-			ref_quote_count        = map_int(., f_get_quote_count),
-			ref_tweet_type         = map_chr(., f_get_tweet_type),
-			ref_ref_tweet_id       = map_chr(., f_get_ref_tweet_id))}
+    {tibble(ref_tweet_id           = map_chr(., "id"),
+            ref_text               = map_chr(., "text"),
+            ref_lang               = map_chr(., "lang"),
+            ref_created_at         = map_chr(., "created_at"),
+            ref_author_id          = map_chr(., "author_id"),
+            ref_conversation_id    = map_chr(., "conversation_id"),
+            ref_reply_settings     = map_chr(., "reply_settings"),
+            ref_geo_place_id       = map_chr(., f_get_geo_placeid),
+            ref_retweet_count      = map_int(., f_get_retweet_count),
+            ref_reply_count        = map_int(., f_get_reply_count),
+            ref_like_count         = map_int(., f_get_like_count),
+            ref_quote_count        = map_int(., f_get_quote_count),
+            ref_tweet_type         = map_chr(., f_get_tweet_type),
+            ref_ref_tweet_id       = map_chr(., f_get_ref_tweet_id))}
 nrow(df_ref_tweets)
 df_ref_tweets <- distinct(df_ref_tweets)
 nrow(df_ref_tweets)
 
 df_places <- raw_places %>% 
-	{tibble(place_id           = map_chr(., "id"),
-			place_full_name    = map_chr(., "full_name"),
-			place_name         = map_chr(., "name"),
-			place_country      = map_chr(., "country"),
-			place_country_code = map_chr(., "country_code"),
-			place_type         = map_chr(., "place_type"))}
+    {tibble(place_id           = map_chr(., "id"),
+            place_full_name    = map_chr(., "full_name"),
+            place_name         = map_chr(., "name"),
+            place_country      = map_chr(., "country"),
+            place_country_code = map_chr(., "country_code"),
+            place_type         = map_chr(., "place_type"))}
 nrow(df_places)
 df_places <- distinct(df_places)
 nrow(df_places)
 
-save(df_tweets, df_users, df_ref_tweets, df_places, file = "examples/recent_search/processed_data.RData")
+save(df_tweets, df_users, df_ref_tweets, df_places, 
+     file = here::here("examples", 
+                       "recent_search", 
+                       "processed_data.RData"))
 

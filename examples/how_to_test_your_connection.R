@@ -11,7 +11,7 @@
 
 # if you have correctly set your bearer token as an environment variable, 
 # this retrieved the value of the token and assigns it to "bearer_token"
-source("f_aux_functions.R")
+source(here::here("aux_functions.R"))
 bearer_token <- f_test_API(token_type = "elevated")
 
 ################################################
