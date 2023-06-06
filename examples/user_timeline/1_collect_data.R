@@ -11,12 +11,15 @@ library("tictoc")
 library("tidyverse")
 # add more packages ONLY if you need to use them
 
+# aux_objects.R contains info about fields and expansions you can request
+source(here::here("aux_objects.R"))
+
 # f_aux_functions.R contains a function that you can use to test the token
 source(here::here("aux_functions.R"))
 my_header <- f_test_API(token_type = "elevated")
 
 # Step 1: collect the user_id for this handle
-handle <- 'techreview'
+handle <- 'TwitterDev'
 url_handle <- paste0('https://api.twitter.com/2/users/by?usernames=', handle)
 response <-	httr::GET(url = url_handle,
 					  config = httr::add_headers(.headers = my_header[["headers"]]))
@@ -37,16 +40,20 @@ user_id <- obj[["data"]][[1]][["id"]]
 # get the first batch
 url_handle <- paste0('https://api.twitter.com/2/users/', user_id, "/tweets")
 n_tweets_per_request <- '100'
-req_tweet_fields <- c("author_id",
-					  "created_at",
-					  "id",
-					  "lang",
-					  "public_metrics",
-					  "source",
-					  "text")
-req_tweet_fields <- stringr::str_c(req_tweet_fields, collapse = ",")
+
+# collect tweets that contain a target keyword
+# you should only collect the data you need
+# you can first check what tweet fields you can add
+tweet_fields <- stringr::str_c(tweet_fields, collapse = ",")
+place_fields <- stringr::str_c(place_fields, collapse = ",")
+user_fields  <- stringr::str_c(user_fields, collapse = ",")
+expansions   <- stringr::str_c(expansions, collapse = ",")
+
 params <- list(max_results = n_tweets_per_request,
-			   tweet.fields = req_tweet_fields)
+			   tweet.fields = tweet_fields,
+			   expansions = expansions,
+			   place.fields = place_fields,
+			   user.fields = user_fields)
 response <-	httr::GET(url = url_handle,
 					  config = httr::add_headers(.headers = my_header[["headers"]]),
 					  query = params)
@@ -77,7 +84,7 @@ obj[["meta"]][["next_token"]]
 #       (see API documentation for details)
 # to prevent you collecting too many tweets by accidents, I add an additional test
 #       for the maximum number of requests
-N_requests <- 10
+N_requests <- 2
 
 while(request_number < N_requests && !is.null(obj[["meta"]][["next_token"]])) {
 	Sys.sleep("2")

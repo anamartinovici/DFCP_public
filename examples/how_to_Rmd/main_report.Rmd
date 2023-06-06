@@ -32,7 +32,7 @@ For more information about child documents, see: https://bookdown.org/yihui/rmar
 
 # Section 1
 
-Let this Section we included from a separate `.Rmd` file called `section_1.Rmd`. In this repository (`ADF_public`), the file is available in `.\examples\how_to_Rmd\sections`.
+Let this Section we included from a separate `.Rmd` file called `section_1.Rmd`. In this repository (`DFCP_public`), the file is available in `.\examples\how_to_Rmd\sections`.
 
 The content of this file is:
 
@@ -42,6 +42,11 @@ The content of this file is:
 # Section 2
 
 ```{r, child=here::here("examples", "how_to_Rmd", "sections", "section_2.Rmd")}
+```
+
+# Section 3
+
+```{r, child=here::here("examples", "how_to_Rmd", "sections", "section_3.Rmd")}
 ```
 
 
