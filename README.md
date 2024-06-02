@@ -2,21 +2,19 @@ This repository contains course materials for "Digital Footprints of Consumer Pr
 
 Brief info about what you find in this repo:
 
-- `elective_info_session`: course manual and step-by-step instructions. Note that these documents were used in the 2021-2022 academic year. The information in these documents is subject to change prior to the start of the course in the 2022-2023 academic year. The availability and functionality of the Twitter API is fully under Twitter's control. Therefore, **it is uncertain if students will learn how to use the Twitter API as part of the 2022-2023 DFCP course**.
+Examples in this repo:
 
-- `aux_functions.R`:
-  
-  - `f_test_API`: you can use this function to test your connection to the Twitter API
-  
-  - `f_get...`: helper functions that you can use to extract specific fields from the response object
+## `API_Kiva`
 
-- `examples\`:
+How to collect data using the Kiva API, and how to process the results.
 
-  - `how_to_test_your_connection.R` shows how to check if you are able to collect data via the Twitter API
-  
-  - `steps_to_collect_data.R` shows how to structure the data collection file
-  
-  - `recent_search`: a detailed example for how to collect data using the recent search endpoint, how to process the response objects, and how to check the output. 
+- `aux_functions.R` contains example helper functions (`f_get...`) that you can use to extract specific fields from the response object
+- `how_to_filter_by_riskRating.R` - exactly what the filename says
+- `how_to_get_MoreThan100LoanIDs.R` - exactly what the filename says
+- `loan_id`: how to get information about a specific loan id
+- `loans_filter`: how to get ids of loans that meet specific criteria and then loop through all the loan IDs and get additional details for each of them.
+- `steps_to_collect_data.R` shows how to structure the data collection file
 
-  - `user_timeline`: a detailed example for how to collect data using the user timeline endpoint, and how to process the response objects.
+## `how_to_Rmd`
 
+How to use advanced R Markdown functionalities that enable reproducible reports.
