@@ -13,7 +13,8 @@ response_allresults <-
                 query = '{
                             lend {
                                 loans (filters: {country: ["MD"]},
-                                       sortBy: newest) {
+                                       sortBy: newest,
+                                       limit: 30) {
                                             totalCount
                                             values {
                                                 id
@@ -35,6 +36,9 @@ content_allresults <- response_allresults |>
 
 
 # based on the first query, I know the total number of results
+content_allresults[["data"]][["lend"]][["loans"]][["totalCount"]]
+
+
 totalCount <- content_allresults[["data"]][["lend"]][["loans"]][["totalCount"]]
 all_response_objects <- vector(mode = "list", length = totalCount)
 request_number <- 1

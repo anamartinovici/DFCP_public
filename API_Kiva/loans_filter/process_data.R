@@ -28,8 +28,6 @@ length(all_content)
 purrr::map(all_content, names)
 # each element in the all_content list contains data
 # extract all "data" lists in a separate list
-purrr::map(all_content, "loan")
-
 all_data <- purrr::map(all_content, "data")
 purrr::map(all_data, names)
 all_data <- purrr::map(all_data, "lend")
@@ -40,8 +38,12 @@ purrr::map(all_data, names)
 # this is how many loans there are in total
 length(all_data)
 
-all_data[[1]][["id"]]
-all_data[[1]][["loanFundraisingInfo"]][["fundedAmount"]]
+all_data[[3]]
+names(all_data[[3]])
+all_data[[3]][["id"]]
+all_data[[3]][["description"]]
+all_data[[3]][["loanFundraisingInfo"]]
+all_data[[3]][["loanFundraisingInfo"]][["fundedAmount"]]
 
 # you need to use functions to extract elements that are in nested lists
 # the functions used by this script are already included in f_aux_functions.R
@@ -62,6 +64,12 @@ df_loans <- all_data %>%
 df_loans <- df_loans %>%
 	mutate(loanAmount = as.numeric(loanAmount),
 		   fundedAmount = as.numeric(fundedAmount))
+
+df_loans <- df_loans %>%
+    mutate(description_length = str_length(description))
+
+df_loans <- df_loans %>%
+    mutate(has_old_in_descr = if_else(str_detect(description, "old"), "yes", "no"))
 
 save(df_loans, 
      file = here::here("API_Kiva", 
