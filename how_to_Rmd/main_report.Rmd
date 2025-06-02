@@ -5,7 +5,6 @@ date: "Last compiled on `r Sys.time()`"
 output: 
     bookdown::html_document2:
         toc: true
-        css: style.css
         toc_float: 
             collapsed: false
         number_sections: true
@@ -36,19 +35,7 @@ Let this Section we included from a separate `.Rmd` file called `section_1.Rmd`.
 
 The content of this file is:
 
-```{r, child=here::here("examples", "how_to_Rmd", "sections", "section_1.Rmd")}
+```{r, child=here::here("how_to_Rmd", "sections", "section_1.Rmd")}
 ```
-
-# Section 2
-
-```{r, child=here::here("examples", "how_to_Rmd", "sections", "section_2.Rmd")}
-```
-
-# Section 3
-
-```{r, child=here::here("examples", "how_to_Rmd", "sections", "section_3.Rmd")}
-```
-
-
 
 
