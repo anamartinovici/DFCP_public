@@ -1,7 +1,7 @@
 ---
 title: "Section 1"
 author: "Ana Martinovici"
-date: "Last compiled on `r Sys.time()`"
+date: "Last compiled on `r Sys.Date()`"
 output: 
     bookdown::html_document2:
         toc: true
@@ -14,7 +14,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-```{r setup-section1, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
