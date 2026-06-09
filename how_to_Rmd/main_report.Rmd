@@ -38,4 +38,16 @@ The content of this file is:
 ```{r, child=here::here("how_to_Rmd", "sections", "section_1.Rmd")}
 ```
 
+# Section 2
+
+```{r, child=here::here("how_to_Rmd", "sections", "section_2.Rmd")}
+```
+
+
+These were the packages use to produce this report:
+
+```{r}
+sessionInfo()
+```
+
 

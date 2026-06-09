@@ -1561,7 +1561,7 @@ font-size: 0.95em;
 
 <h1 class="title toc-ignore">Main report</h1>
 <h4 class="author">Ana Martinovici</h4>
-<h4 class="date">Last compiled on 2025-06-10</h4>
+<h4 class="date">Last compiled on 2026-06-09</h4>
 
 </div>
 
@@ -1592,6 +1592,66 @@ font-size: 0.95em;
 <p>Check the <code>YAML</code> section in this file. You’ll notice that I’m using <code>bookdown</code>. For more details: <a href="https://bookdown.org/yihui/bookdown/" class="uri">https://bookdown.org/yihui/bookdown/</a></p>
 <p>Try to see what happens if you switch between <code>true</code> and <code>false</code> some of the output specifications. For example, try it out with <code>number_sections</code>. Then, see what happens when the child document has a different value for <code>number_section</code> compared to the main report.</p>
 </div>
+</div>
+<div id="section-2" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Section 2</h1>
+<ol start="4" style="list-style-type: decimal">
+<li>How to include code from external scripts</li>
+</ol>
+<p>This example shows how to print specific lines from an external script. You can use this to show, in your final report, how you masked data, and other relevant steps in your project.</p>
+<pre class="r"><code>file_name &lt;- here::here(&quot;Cat_API&quot;, &quot;data_collection.R&quot;) 
+start_line &lt;- 3
+end_line &lt;- 18
+knitr::read_chunk(path = file_name, labels = &quot;my-query-params&quot;, from = start_line, to = end_line) 
+ 
+file_in_repo &lt;- stringr::str_sub(file_name, start = stringr::str_locate(file_name, &quot;/DFCP_public&quot;)[1, &quot;start&quot;]) </code></pre>
+<p>Specifically, we are including lines 3:18 from /DFCP_public/Cat_API/data_collection.R:</p>
+<pre class="r"><code>n_cats &lt;- 220
+n_cats_per_request &lt;- 100
+n_requests &lt;- n_cats %/% n_cats_per_request + 
+    as.numeric((n_cats %% n_cats_per_request) &gt; 0)
+
+list_response &lt;- vector(mode = &quot;list&quot;, length = n_requests)
+for(index_page in 1:n_requests) {
+    if (index_page == n_requests) {
+        n_cats_per_request &lt;- n_cats - (n_requests - 1)*n_cats_per_request
+    }
+    
+    my_request &lt;- httr2::request(base_url = &quot;https://api.thecatapi.com/v1/images/search&quot;) |&gt;
+        req_url_query(api_key = Sys.getenv(&quot;CAT_API_KEY&quot;),
+                      limit = n_cats_per_request,
+                      page = index_page - 1,</code></pre>
+<p>These were the packages use to produce this report:</p>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R version 4.6.0 (2026-04-24 ucrt)
+## Platform: x86_64-w64-mingw32/x64
+## Running under: Windows 11 x64 (build 26200)
+## 
+## Matrix products: default
+##   LAPACK version 3.12.1
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.utf8 
+## [2] LC_CTYPE=English_United States.utf8   
+## [3] LC_MONETARY=English_United States.utf8
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.utf8    
+## 
+## time zone: Europe/Amsterdam
+## tzcode source: internal
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## loaded via a namespace (and not attached):
+##  [1] digest_0.6.39     R6_2.6.1          bookdown_0.46     fastmap_1.2.0    
+##  [5] xfun_0.57         magrittr_2.0.5    glue_1.8.1        cachem_1.1.0     
+##  [9] stringr_1.6.0     knitr_1.51        htmltools_0.5.9   rmarkdown_2.31   
+## [13] lifecycle_1.0.5   cli_3.6.6         vctrs_0.7.3       sass_0.4.10      
+## [17] jquerylib_0.1.4   compiler_4.6.0    rprojroot_2.1.1   here_1.0.2       
+## [21] rstudioapi_0.18.0 tools_4.6.0       evaluate_1.0.5    bslib_0.10.0     
+## [25] yaml_2.3.12       otel_0.2.0        jsonlite_2.0.0    rlang_1.2.0      
+## [29] stringi_1.8.7</code></pre>
 </div>
 
 

@@ -24,12 +24,12 @@ Go to <https://developers.thecatapi.com> to read more about this API, how to get
 
 ## How to collect data
 
-The file `cat_API/one_cat.R` shows the hello world equivalent of collecting data from the API.
+The file `Cat_API/one_cat.R` shows the hello world equivalent of collecting data from the API.
 
 These lines of code place the request:
 
 ```{r, echo=FALSE}
-file_name <- here::here("cat_API", "one_cat.R")
+file_name <- here::here("Cat_API", "one_cat.R")
 start_line <- 1
 end_line <- 17
 knitr::read_chunk(path = file_name, labels = "my-query-params", from = start_line, to = end_line) 
@@ -44,7 +44,7 @@ knitr::read_chunk(path = file_name, labels = "my-query-params", from = start_lin
 This is the photo collected with the example code:
 
 ```{r, class.source = 'fold-hide'}
-knitr::include_graphics(path = here::here("cat_API", "photos", "one_cat.jpg"),
+knitr::include_graphics(path = here::here("Cat_API", "photos", "one_cat.jpg"),
                         rel_path = FALSE)
 ```
 
@@ -53,8 +53,3 @@ knitr::include_graphics(path = here::here("cat_API", "photos", "one_cat.jpg"),
 After checking that the simple example worked, I've extended the code to allow for collection of multiple observations and fields. Data collection took place in `cat_API/collect_data.R`. Multiple requests were placed with a filter on retrieving observations that have breed information.
 
 The raw data collected from the API was saved within the repo and then processed by a separate script.
-
-
-
-
-

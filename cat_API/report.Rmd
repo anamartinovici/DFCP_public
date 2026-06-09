@@ -21,10 +21,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This report provides information about how to use the Cat API and examples of the type of data you can collect.
 
-```{r, child=here::here("cat_API", "report_sections", "cat_API.Rmd")}
+```{r, child=here::here("Cat_API", "report_sections", "cat_API.Rmd")}
 ```
 
-```{r, child=here::here("cat_API", "report_sections", "data_descriptives.Rmd")}
+```{r, child=here::here("Cat_API", "report_sections", "data_descriptives.Rmd")}
 ```
-
-

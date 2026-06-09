@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Data descriptives
 
-Processed data is saved in `cat_API/process_data.RData`.
+Processed data is saved in `Cat_API/process_data.RData`.
 
 ```{r}
 
@@ -28,7 +28,7 @@ library("tidyverse")
 library("labelled")
 library("kableExtra")
 
-load(here::here("cat_API", "process_data.RData"))
+load(here::here("Cat_API", "process_data.RData"))
 
 ```
 
